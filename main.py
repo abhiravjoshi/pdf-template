@@ -13,16 +13,16 @@ def main():
         Name: 26, dtype: object
         """
         if rows['Pages'] > 1:
-            for i in range(0, rows['Pages']):
+            for i in range(rows['Pages']):
                 pdf.add_page()
                 pdf.set_font(family="Times", style='b', size=12)
                 pdf.set_text_color(100, 100, 100)
                 # (R, G, B) tuple argument, closer to zero, the darker the color
-                if i==0:
+                if i == 0:
                     topics = rows['Topic']
                     pdf.cell(w=0, h=12, txt=topics, align='L', ln=1)
                     pdf.line(10, 20, 206, 20)
-                #pdf.footer()
+                # pdf.footer()
     pdf.output("output.pdf")
 
 
