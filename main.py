@@ -2,6 +2,12 @@ from fpdf import FPDF
 import pandas as pd
 
 
+def make_lines(pdf, start):
+    line_size = 7
+    for i in range(start, 297 - line_size, line_size):
+        pdf.line(10, i, 200, i)
+
+
 def main():
     df = pd.read_csv('topics.csv', )
     df = df.set_index('Order')
@@ -17,26 +23,26 @@ def main():
         if rows['Pages'] > 1:
             for i in range(rows['Pages']):
                 pdf.add_page()
-                pdf.set_font(family="Times", style='b', size=12)
+                pdf.set_font(family="Times", style='b', size=24)
                 pdf.set_text_color(100, 100, 100)
                 # (R, G, B) tuple argument, closer to zero, the darker the color
                 if i == 0:
                     # set header of first page
                     topics = rows['Topic']
                     pdf.cell(w=0, h=12, txt=topics, align='L', ln=1)
-                    pdf.line(10, 21, 200, 21)
+                    # pdf.line(10, 21, 200, 21)
+                    make_lines(pdf, 21)
                     # set the footer:
                     pdf.ln(265)
                     pdf.set_font(family="Times", size=10)
                     pdf.set_text_color(180, 180, 180)
                     pdf.cell(w=0, h=10, txt=rows['Topic'], align='R')
                 else:
+                    make_lines(pdf, 14)
                     pdf.ln(277)
                     pdf.set_font(family="Times", size=10)
                     pdf.set_text_color(180, 180, 180)
                     pdf.cell(w=0, h=10, txt=rows['Topic'], align='R')
-
-
     pdf.output("output.pdf")
 
 
