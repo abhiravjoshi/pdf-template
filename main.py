@@ -46,6 +46,35 @@ def main():
     pdf.output("output.pdf")
 
 
+def for_fun():
+    # these were some mess-ups I encountered while coding make_lines()
+    # page 1
+    pdf = FPDF(orientation='p', unit='mm', format='A4')
+    pdf.add_page()
+    pdf.set_font(family="Times", style='b', size=24)
+    pdf.set_text_color(100, 100, 100)
+    line_size = 7
+    for i in range(21, 297 - line_size, line_size):
+        pdf.line(i, 21, 200, line_size)
+
+    # page 2
+    pdf.add_page()
+    pdf.set_font(family="Times", style='b', size=24)
+    pdf.set_text_color(100, 100, 100)
+    for i in range(21, 297 - line_size, line_size):
+        pdf.line(10, i, 200, line_size)
+
+    # page 3
+    pdf.add_page()
+    pdf.set_font(family="Times", style='b', size=24)
+    pdf.set_text_color(100, 100, 100)
+    for i in range(21, 297 - (line_size * 14), line_size):
+        pdf.line(i, 21, 200, i)
+        pdf.line(10, 21, i, i)
+    pdf.output("output2.pdf")
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     main()
+    # for_fun()
